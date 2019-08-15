@@ -1,4 +1,4 @@
-const modelBook = require('../models/')
+const modelBook = require('../models//cru')
 const deleteBG = require('../models/delete')
 
 module.exports = {

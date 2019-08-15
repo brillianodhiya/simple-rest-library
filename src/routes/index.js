@@ -1,7 +1,7 @@
 const express = require('express')
 
 const Route = express.Router()
-const libraryController = require('../controllers/')
+const libraryController = require('../controllers/crud')
 const searchController = require('../controllers/search')
 const rentController = require('../controllers/rent')
 const returnController = require('../controllers/return')
