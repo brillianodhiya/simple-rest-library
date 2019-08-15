@@ -1,0 +1,33 @@
+const express = require('express')
+
+const Route = express.Router()
+const libraryController = require('../controllers/')
+const searchController = require('../controllers/search')
+const rentController = require('../controllers/rent')
+const returnController = require('../controllers/return')
+const shortController = require('../controllers/short')
+const availController = require('../controllers/availability')
+const getAllController = require('../controllers/pagination')
+const combineController = require('../controllers/combine')
+
+Route
+    // .get('/', libraryController.getBooks)
+    .post('/', libraryController.insertBook)
+    .patch('/', libraryController.updateBook)
+    .post('/genre', libraryController.insertGenre)
+    .get('/genre', libraryController.getGenre)
+    .delete('/', libraryController.deleteBook)
+    .delete('/genre', libraryController.deleteGenre)
+    .get('/search', searchController.searchBook)
+    .post('/rent', rentController.rentBook)
+    .post('/return', returnController.rentBook)
+    .get('/shortbytitle', shortController.getShortTitle)
+    .get('/shortbydate', shortController.getShortDate)
+    .get('/shortbygenres', shortController.getShortGenre)
+    .get('/available', availController.getAvailable)
+    .get('/notavailable', availController.getNotAvailable)
+    .get('/rent', rentController.getRent)
+    .get('/', getAllController.getAll)
+    .get('/combine', combineController.combinSearch)
+
+module.exports = Route
