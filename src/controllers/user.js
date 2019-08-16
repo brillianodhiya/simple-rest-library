@@ -31,7 +31,7 @@ module.exports = {
           })
           .catch(err => console.log(err))
       })
-      .catch(err => console.log('Email already taken'))
+      .catch(err => res.send('Email already taken'))
   },
   loginset: (req, res) => {
     const email = req.body.email
