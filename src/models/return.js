@@ -2,17 +2,17 @@ const conn = require('../configs/')
 
 module.exports = {
   rentBook: (id, rent) => {
-    let output = ''
+    let output = '' //add output
     return new Promise((resolve, reject) => {
-      conn.query('SELECT * FROM books WHERE ?', id, (err, result) => {
+      conn.query('SELECT * FROM books WHERE ?', id, (err, result) => { //search book
         if (!err) {
-          Object.keys(result).forEach(function (key) {
+          Object.keys(result).forEach((key) => { //manipulating array of object
             const row = result[key]
 
-            if (row.available !== 1) {
-              conn.query('UPDATE books SET available = 1 WHERE ?', id, (err, result) => {
+            if (row.available !== 1) { // if book not already return
+              conn.query('UPDATE books SET available = 1 WHERE ?', id, (err, result) => { //set not available into available
                 if (!err) {
-                  conn.query('UPDATE rents SET ? WHERE ?', [rent, id], (err, result) => {
+                  conn.query('UPDATE rents SET ? WHERE ?', [rent, id], (err, result) => { // update rental table
                     if (!err) {
                       console.log('suksess')
                       output = ('Suksess')

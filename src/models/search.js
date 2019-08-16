@@ -4,7 +4,7 @@ module.exports = {
   searchBook: (keyword) => {
     const search = keyword.search
     return new Promise((resolve, reject) => {
-      conn.query('ALTER TABLE books ADD FULLTEXT(title, description)')
+      conn.query('ALTER TABLE books ADD FULLTEXT(title, description)') //add index table
       conn.query('SELECT title, description, image FROM books WHERE MATCH (title, description) AGAINST( ? )', search, (err, result) => {
         !err ? resolve(result) : reject(err)
       })

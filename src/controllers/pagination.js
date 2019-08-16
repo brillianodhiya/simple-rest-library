@@ -8,9 +8,9 @@ module.exports = {
     }
 
     let limit = parseInt(req.query.limit)
-    if (isNaN(limit)) {
+    if (isNaN(limit)) { //if limit is not integer
       limit = 10
-    } else if (limit > 50) {
+    } else if (limit > 50) { 
       limit = 50
     } else if (limit < 1) {
       limit = 1
