@@ -11,13 +11,13 @@ const app = express()
 const port = process.env.SERVER_PORT
 
 app.listen(port, () => {
-    console.log('Server is running on Port ' + port)
+  console.log('Server is running on Port ' + port)
 })
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }))
 
 app.use('/books', Route)
