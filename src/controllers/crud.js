@@ -15,7 +15,7 @@ module.exports = {
     } // add data for table database
 
     modelBook.insertBook(data)
-      .then(result => res.send('Succesfully Add'))
+      .then(result => res.send('Succes Insert book'))
       .catch(err => console.log(err)) // execute
   },
   getBooks: (req, res) => {
@@ -64,7 +64,7 @@ module.exports = {
   },
   deleteBook: (req, res) => {
     const id = {
-      idbooks: req.body.idbooks
+      idbooks: req.query.idbooks
     }
 
     deleteBG.deleteBook(id)

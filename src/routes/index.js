@@ -13,7 +13,6 @@ const userController = require('../controllers/user')
 const verify = require('../middleware/verify')
 
 Route
-   // .get('/', libraryController.getBooks)
   .post('/', verify,libraryController.insertBook)
   .patch('/', verify,libraryController.updateBook)
   .post('/genre', verify,libraryController.insertGenre)

@@ -8,7 +8,7 @@ const Route = require('./src/routes/')
 
 const app = express()
 
-const port = process.env.SERVER_PORT
+const port = process.env.SERVER_PORT || 8888
 
 app.listen(port, () => {
   console.log('Server is running on Port ' + port)

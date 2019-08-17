@@ -8,24 +8,19 @@ module.exports = {
   regiset: (req, res) => {
     const name = req.body.name
     const email = req.body.email
-    const password = bcrypt.hashSync(req.body.password) // encrypt using bcrypt
+    const password = bcrypt.hashSync(req.body.password) 
 
     Users.createUser([name, email, password])
       .then(result => {
         Users.findUserByEmail(email)
           .then(row => {
             Object.keys(row).forEach((key) => {
-              const user = row[key] // manipulating object into array of obj
-              const expireIn = 24 * 60 * 60 // expire one day 1 (60 * 60 is mean 1 mins and * 24)
+              const user = row[key] 
               const accessToken = jwt.sign({
                 id: user.id
-              }, process.env.SECRET_KEY, {
-                expiresIn: expireIn
-              })
+              }, process.env.SECRET_KEY)
               res.status(200).header('Authorization', accessToken).send({
-                user: user,
-                access_token: accessToken,
-                expire_in: expireIn
+                access_token: accessToken
               })
             })
           })
@@ -42,18 +37,13 @@ module.exports = {
         Object.keys(row).forEach((key) => {
           const user = row[key]
 
-          const result = bcrypt.compareSync(password, user.password) // decrypt using bcrypt
+          const result = bcrypt.compareSync(password, user.password) 
           if (!result) return res.status(401).send('User not Found')
-          const expireIn = 24 * 60 * 60
           const accessToken = jwt.sign({
             id: user.id
-          }, process.env.SECRET_KEY, {
-            expiresIn: expireIn
-          })
+          }, process.env.SECRET_KEY)
           res.status(200).header('Authorization', accessToken).send({
-            user: row,
-            acces_token: accessToken,
-            expires_in: expireIn
+            acces_token: accessToken
           })
         })
       })
