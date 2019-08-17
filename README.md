@@ -1,4 +1,4 @@
-# RESTful API Rent Book
+# RESTful API Rent Book 📚
 > Simple RESTful API using node & express
 
 [![NPM Version][npm-image]][npm-url]
