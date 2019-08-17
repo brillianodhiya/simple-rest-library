@@ -4,7 +4,7 @@ module.exports = {
 
   searchBook: (req, res) => {
     const keyword = {
-      search: req.body.search
+      search: req.query.search
     }
 
     search.searchBook(keyword)

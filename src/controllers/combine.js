@@ -6,7 +6,7 @@ module.exports = {
     const page = parseInt(req.query.page) || 1
     const limit = parseInt(req.query.limit) || 10
     const shortby = req.query.shortby || 'add_at'
-    const search = req.query.search || ''
+    //const search = req.query.search || ''
     const order = req.query.search || 'ASC'
 
     combin.combineSearch(page, limit, shortby, search, order)
