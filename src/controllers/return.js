@@ -1,7 +1,7 @@
-const Rent = require('../models/return')
+const Return = require('../models/return')
 
 module.exports = {
-  rentBook: (req, res) => {
+  returnBook: (req, res) => {
     const id = {
       idbooks: req.body.idbooks
     }
@@ -10,8 +10,19 @@ module.exports = {
       back_at: new Date()
     }
 
-    Rent.rentBook(id, rent)
-      .then(result => res.json(result))
-      .catch(err => console.log(err))
+    Return.returnBook(id, rent)
+      .then(result => {
+        Object.keys(result).forEach((key) => {
+          const row = result[key]
+          if (row.available == 1) {
+            res.send('Book already returned')
+          } else if (row.available == 0) {
+            res.send('Thank you for returned the book')
+          } else {
+            res.send('Book not found')
+          }
+        })
+      })
+      .catch(err => res.send('Book not found'))
   }
 }

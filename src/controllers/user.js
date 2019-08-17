@@ -58,8 +58,5 @@ module.exports = {
         })
       })
       .catch(err => console.log(err))
-  },
-  auth: (req, res) => {
-    res.status(200).send('This is an Authentication server')
   }
 }

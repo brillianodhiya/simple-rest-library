@@ -1,36 +1,32 @@
 const conn = require('../configs/')
 
 module.exports = {
-  rentBook: (id, rent) => {
-    let output = '' //add output
+  returnBook: (id, rent) => {
     return new Promise((resolve, reject) => {
       conn.query('SELECT * FROM books WHERE ?', id, (err, result) => { //search book
-        if (!err) {
+        if (result != '') {
           Object.keys(result).forEach((key) => { //manipulating array of object
             const row = result[key]
 
-            if (row.available !== 1) { // if book not already return
+            if (row.available == 0) { // if book not already return
               conn.query('UPDATE books SET available = 1 WHERE ?', id, (err, result) => { //set not available into available
                 if (!err) {
                   conn.query('UPDATE rents SET ? WHERE ?', [rent, id], (err, result) => { // update rental table
                     if (!err) {
                       console.log('suksess')
-                      output = ('Suksess')
                     } else {
                       console.log('error')
                     }
                   })
-                  output = ('Thank You! For Return The Book')
                 } else {
                   console.log('error')
                 }
               })
             } else {
-              console.log('kosong')
-              output = ('The book has already return')
+              console.log('the book has already returned')
             }
           })
-          resolve(output)
+          resolve(result)
         } else {
           reject(err)
         }

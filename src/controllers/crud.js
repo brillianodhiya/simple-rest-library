@@ -9,13 +9,13 @@ module.exports = {
       image: req.body.image,
       date_released: req.body.date_released,
       genre: req.body.genre,
-      available: req.body.available,
+      available: 1,
       add_at: new Date(),
       update_at: new Date()
     } // add data for table database
 
     modelBook.insertBook(data)
-      .then(result => res.json(result))
+      .then(result => res.send('Succesfully Add'))
       .catch(err => console.log(err)) // execute
   },
   getBooks: (req, res) => {
@@ -34,12 +34,17 @@ module.exports = {
       image: req.body.image,
       date_released: req.body.date_released,
       genre: req.body.genre,
-      available: req.body.available,
       update_at: new Date()
     }
 
     modelBook.updateBook(id, data)
-      .then(result => res.json(result))
+      .then(result => {
+        if (result.affectedRows == 0) {
+          res.send('Id book not found')
+        } else {
+          res.send('Success Changed Update')
+        }
+      })
       .catch(err => console.log(err))
   },
   insertGenre: (req, res) => {
@@ -49,8 +54,8 @@ module.exports = {
     }
 
     modelBook.insertGenre(data)
-      .then(result => res.json(result))
-      .catch(err => console.log(err))
+      .then(result => res.send('Succesfully add genre'))
+      .catch(err => res.send('code genre has been taken before'))
   },
   getGenre: (req, res) => {
     modelBook.getGenre()
@@ -63,7 +68,13 @@ module.exports = {
     }
 
     deleteBG.deleteBook(id)
-      .then(result => res.send(result))
+      .then(result => {
+        if (result.affectedRows == 0 ) {
+          res.send('Id book not found')
+        } else {
+          res.send('success deleting')
+        }
+      })
       .catch(err => console.log(err))
   },
   deleteGenre: (req, res) => {
@@ -72,7 +83,13 @@ module.exports = {
     }
 
     deleteBG.deleteGenre(id)
-      .then(result => res.send(result))
+      .then(result => {
+        if (result.affectedRows == 0) {
+          res.send('id genre not found')
+        } else {
+          res.send('success deleting')
+        }
+      })
       .catch(err => console.log(err))
   }
 }

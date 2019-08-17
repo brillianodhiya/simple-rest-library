@@ -22,7 +22,7 @@ Route
   .delete('/genre', verify,verify,libraryController.deleteGenre)
   .get('/search', verify,searchController.searchBook)
   .post('/rent', verify,rentController.rentBook)
-  .post('/return', verify,returnController.rentBook)
+  .post('/return', verify,returnController.returnBook)
   // .get('/shortbytitle', shortController.getShortTitle)
   // .get('/shortbydate', shortController.getShortDate)
   // .get('/shortbygenres', shortController.getShortGenre)
