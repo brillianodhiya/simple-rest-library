@@ -20,13 +20,23 @@ module.exports = {
                 id: user.id
               }, process.env.SECRET_KEY)
               res.status(200).header('Authorization', accessToken).send({
+                status: 200,
+                message: 'Register Success',
                 access_token: accessToken
               })
             })
           })
-          .catch(err => console.log(err))
+          .catch(err => res.send({
+            status: 401,
+            message: 'Something Went Wrong',
+            err
+          }))
       })
-      .catch(err => res.send('Email already taken'))
+      .catch(err => res.send({
+        status: 401,
+        message: 'Email Already Taken',
+        err
+      }))
   },
   loginset: (req, res) => {
     const email = req.body.email
@@ -43,6 +53,8 @@ module.exports = {
             id: user.id
           }, process.env.SECRET_KEY)
           res.status(200).header('Authorization', accessToken).send({
+            status: 200,
+            message: 'Login Success',
             acces_token: accessToken
           })
         })
