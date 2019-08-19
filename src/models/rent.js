@@ -33,8 +33,8 @@ module.exports = {
       })
     })
   },
-  getRent: () => new Promise((resolve, reject) => {
-    conn.query('SELECT books.title, books.description, books.image, rents.rent_at, rents.back_at FROM books INNER JOIN rents ON books.idbooks = rents .idbooks', (err, result) => {
+  getRent: (id) => new Promise((resolve, reject) => {
+    conn.query(`SELECT books.title, books.description, books.image, rents.rent_at, rents.back_at FROM books INNER JOIN rents ON books.idbooks = rents .idbooks WHERE rents.iduser = ${id}`, (err, result) => {
       !err ? resolve(result) : reject(err)
     })
   })

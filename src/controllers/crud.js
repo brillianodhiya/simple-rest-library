@@ -15,8 +15,16 @@ module.exports = {
     } // add data for table database
 
     modelBook.insertBook(data)
-      .then(result => res.send('Succes Insert book'))
-      .catch(err => console.log(err)) // execute
+      .then(result => res.send({
+        status: 200,
+        message: 'Success Insert Book',
+        result
+      }))
+      .catch(err => res.send({
+        status: 500,
+        message: 'Something went wrong',
+        err        
+      })) // execute
   },
   getBooks: (req, res) => {
     modelBook.getBookData()
@@ -25,7 +33,7 @@ module.exports = {
   },
   updateBook: (req, res) => {
     const id = {
-      idbooks: req.body.idbooks
+      idbooks: req.query.idbooks
     }
 
     const data = {
@@ -40,12 +48,26 @@ module.exports = {
     modelBook.updateBook(id, data)
       .then(result => {
         if (result.affectedRows == 0) {
-          res.send('Id book not found')
+          res.send({
+            status: 400,
+            message: 'Update Failed',
+            result
+          })
         } else {
-          res.send('Success Changed Update')
+          res.send({
+            status: 200,
+            message: 'The book information successfully update',
+            result
+          })
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        res.send({
+          status: 500,
+          message: 'Something Went Wrong',
+          err
+        })
+      })
   },
   insertGenre: (req, res) => {
     const data = {
@@ -54,8 +76,16 @@ module.exports = {
     }
 
     modelBook.insertGenre(data)
-      .then(result => res.send('Succesfully add genre'))
-      .catch(err => res.send('code genre has been taken before'))
+      .then(result => res.send({
+        status: 200,
+        message: 'Successfully add genre',
+        result
+      }))
+      .catch(err => res.send({
+        status: 400,
+        message: 'Code genre has been taken before',
+        err
+      }))
   },
   getGenre: (req, res) => {
     modelBook.getGenre()
@@ -70,12 +100,24 @@ module.exports = {
     deleteBG.deleteBook(id)
       .then(result => {
         if (result.affectedRows == 0 ) {
-          res.send('Id book not found')
+          res.send({
+            status: 401,
+            message: 'Failed Deleting Book',
+            result
+          })
         } else {
-          res.send('success deleting')
+          res.send({
+            status: 200,
+            message: 'Success Deleting Book',
+            result
+          })
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => res.send({
+        status: 500,
+        message: 'Something Went Wrong',
+        err
+      }))
   },
   deleteGenre: (req, res) => {
     const id = {
@@ -85,11 +127,54 @@ module.exports = {
     deleteBG.deleteGenre(id)
       .then(result => {
         if (result.affectedRows == 0) {
-          res.send('id genre not found')
+          res.send({
+            status: 401,
+            message: 'Failed Deleting Book',
+            result
+          })
         } else {
-          res.send('success deleting')
+          res.send({
+            status: 200,
+            message: 'Success Deleting Genre'
+          })
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => res.send({
+        status: 500,
+        message: 'Something Went Wrong',
+        err
+      }))
+  },
+  updateGenre: (req, res) => {
+    const code = {
+      codegenre: req.query.codegenre
+    }
+
+    const data = {
+      keterangan: req.body.keterangan
+    }
+    modelBook.updateGenre(data, code)
+      .then(result => {
+        if (result.affectedRows == 0) {
+          res.send({
+            status: 400,
+            message: 'Update Failed',
+            result
+          })
+        } else {
+          res.send({
+            status: 200,
+            message: 'The Genre Information Successfully Changed',
+            result
+          })
+        }
+      })
+      .catch(err => {
+        res.send({
+          status: 500,
+          message: 'Something Went Wrong',
+          err
+        })
+      })
   }
 }

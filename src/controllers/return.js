@@ -3,7 +3,7 @@ const Return = require('../models/return')
 module.exports = {
   returnBook: (req, res) => {
     const id = {
-      idbooks: req.body.idbooks
+      idbooks: req.query.idbooks
     }
 
     const rent = {
@@ -15,14 +15,30 @@ module.exports = {
         Object.keys(result).forEach((key) => {
           const row = result[key]
           if (row.available == 1) {
-            res.send('Book already returned')
+            res.send({
+              status: 401,
+              message: 'Book Already Returned',
+              result
+            })
           } else if (row.available == 0) {
-            res.send('Thank you for returned the book')
+            res.send({
+              status: 200,
+              message: 'Thank You For Returned The Book',
+              result
+            })
           } else {
-            res.send('Book not found')
+            res.send({
+              status: 400,
+              message: 'Book not found',
+              result
+            })
           }
         })
       })
-      .catch(err => res.send('Book not found'))
+      .catch(err => res.send({
+        status: 500,
+        message: 'Something Went Wrong',
+        err
+      }))
   }
 }

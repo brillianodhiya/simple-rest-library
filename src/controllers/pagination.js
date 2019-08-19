@@ -1,4 +1,5 @@
 const pagin = require('../models/pagination')
+const recordd = require('../models/combine')
 
 module.exports = {
   getAll: (req, res) => {
@@ -17,7 +18,33 @@ module.exports = {
     }
 
     pagin.getAll(page, limit)
-      .then(result => res.json(result))
-      .catch(err => console.log(err))
+      .then(result => {
+        recordd.countRecords()
+        .then(records => {
+          Object.keys(records).forEach((key) => {
+            let row = records[key]
+            let pages = row.record / limit
+            let listPage = Math.ceil(pages)
+            res.status(200).send({
+              "pages": listPage,
+              result
+            })
+          })
+        })
+        .catch(err => {
+          res.send({
+            status: 401,
+            message: 'Something Went Wrong',
+            err
+          })
+        })
+      })
+      .catch(err => {
+        res.send({
+          status: 500,
+          message: 'Something Went Wrong',
+          err
+        })
+      })
   }
 }

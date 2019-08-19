@@ -9,6 +9,9 @@ module.exports = (req, res, next) => {
         req.user = verifytoken 
         next() 
     } catch {
-        res.statu(401).send('error')
+        res.status(401).send({
+            status: 401,
+            message: 'You Should Register or Login First'
+        })
     }
 }

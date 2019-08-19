@@ -2,13 +2,16 @@ const avail = require('../models/availability')
 
 module.exports = {
   getAvailable: (req, res) => {
-    avail.availables()
+    let choice = req.query.choice
+
+    if (choice == '') {
+      status = ''
+    } else {
+      status = 'NOT'
+    }
+
+    avail.availables(status)
       .then(result => res.json(result))
       .catch(err => console.log(err))
   },
-  getNotAvailable: (req, res) => {
-    avail.notAvailables()
-      .then(result => res.json(result))
-      .catch(err => console.log(err))
-  }
 }

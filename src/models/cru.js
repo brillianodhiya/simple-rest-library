@@ -35,5 +35,12 @@ module.exports = {
         !err ? resolve(result) : reject(err)
       })
     })
+  },
+  updateGenre: (data, code) => {
+    return new Promise((resolve, reject) => {
+      conn.query('UPDATE genre SET ? WHERE ?', [data, code], (err, result) => {
+        !err ? resolve(result) : reject(err)
+      })
+    })
   }
 }

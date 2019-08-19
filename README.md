@@ -14,7 +14,7 @@
 6. Create database called ``` simple-rest-library ``` & import [simple_rest_library.sql](db/simple_rest_library.sql)
 
 
-## To set up .env fule
+## To set up .env file
 
 You can copy this:
 
