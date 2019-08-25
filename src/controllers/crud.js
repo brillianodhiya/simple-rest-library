@@ -14,6 +14,7 @@ module.exports = {
       update_at: new Date()
     } // add data for table database
 
+    console.log(data)
     modelBook.insertBook(data)
       .then(result => res.send({
         status: 200,

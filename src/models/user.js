@@ -7,7 +7,7 @@ module.exports = {
     })
   }),
   createUser: (user) => new Promise((resolve, reject) => {
-    conn.query('INSERT INTO users (name, email, password) VALUES (?,?,?)', user, (err, result) => {
+    conn.query('INSERT INTO users (username, name, email, password) VALUES (?,?,?,?)', user, (err, result) => {
       !err ? resolve(result) : reject(err)
     })
   })

@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const cors = require('cors')
 const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
@@ -9,6 +10,8 @@ const Route = require('./src/routes/')
 const app = express()
 
 const port = process.env.SERVER_PORT || 8888
+
+app.use(cors())
 
 app.listen(port, () => {
   console.log('Server is running on Port ' + port)

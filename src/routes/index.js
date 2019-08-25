@@ -14,24 +14,25 @@ const validation = require('../middleware/validation')
 const validationlogin = require('../middleware/validationlogin')
 
 Route
-  .post('/', verify,libraryController.insertBook)
-  .patch('/', verify,libraryController.updateBook)
-  .delete('/', verify,libraryController.deleteBook)
-  .get('/', verify,combineController.combinSearch)
+  .post('/', libraryController.insertBook)
+  .patch('/', libraryController.updateBook)
+  .delete('/', libraryController.deleteBook)
+  .get('/', combineController.combinSearch)
+  .get('/show', searchController.searchById)
 
-  .post('/genre', verify,libraryController.insertGenre)
-  .get('/genre', verify,libraryController.getGenre)
-  .delete('/genre', verify,verify,libraryController.deleteGenre)
-  .patch('/genre', verify,libraryController.updateGenre)
+  .post('/genre', libraryController.insertGenre)
+  .get('/genre', libraryController.getGenre)
+  .delete('/genre', libraryController.deleteGenre)
+  .patch('/genre', libraryController.updateGenre)
 
-  .post('/rent', verify,rentController.rentBook)
-  .get('/rent', verify,rentController.getRent)
+  .post('/rent', rentController.rentBook)
+  .get('/rent', rentController.getRent)
 
-  .post('/return', verify,returnController.returnBook)
+  .post('/return', returnController.returnBook)
 
-  .get('/available', verify,availController.getAvailable)
+  .get('/available', availController.getAvailable)
   
-  .post('/register', validation,userController.regiset)
+  .post('/register', userController.regiset)
   .post('/login', validationlogin,userController.loginset)
 
 module.exports = Route
