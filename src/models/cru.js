@@ -3,7 +3,7 @@ const conn = require('../configs/')
 module.exports = {
   getBookData: () => { // tampil buku
     return new Promise((resolve, reject) => {
-      conn.query('SELECT books.title, books.description, books.image, books.date_released, genre.keterangan as genre, availables.keterangan as available FROM books INNER JOIN genre ON genre = codegenre INNER JOIN availables ON available = codeav ', (err, result) => {
+      conn.query('SELECT books.idbooks, books.title, books.description, books.image, books.date_released, genre.keterangan as genre, availables.keterangan as available FROM books INNER JOIN genre ON genre = codegenre INNER JOIN availables ON available = codeav ', (err, result) => {
         !err ? resolve(result) : reject(err)
       })
     })

@@ -5,16 +5,20 @@ const Rent = require('../models/rent')
 module.exports = {
   rentBook: (req, res) => {
     const id = {
-      idbooks: req.body.idbooks
+      idbooks: req.query.idbooks
     }
 
-    let token = req.header('Authorization')
+    let token = req.headers['x_token']
 
     let decoded = jwtDecode(token) 
 
+    let expire = new Date();
+    expire.setDate(expire.getDate() + 14);
+
     const rent = {
       iduser: decoded.id,
-      rent_at: new Date()
+      rent_at: new Date().toDateString(),
+      expire_at: expire.toDateString(),
     }
 
     Rent.rentBook(id, rent)
@@ -42,7 +46,7 @@ module.exports = {
       }))
   },
   getRent: (req, res) => {
-    let tokens = req.header('Authorization')
+    let tokens = req.headers['x_token']
 
     let decode = jwtDecode(tokens) 
 

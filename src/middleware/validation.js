@@ -5,6 +5,8 @@ module.exports = (req, res, next) => {
 
     const schema = {
 
+        username: Joi.string().min(3).max(8).required(),
+
         name: Joi.string().min(3).max(16).required(),
 
         email: Joi.string().email().required(),

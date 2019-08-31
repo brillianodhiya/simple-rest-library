@@ -7,7 +7,7 @@ module.exports = {
     }
 
     const rent = {
-      back_at: new Date()
+      back_at: new Date().toDateString()
     }
 
     Return.returnBook(id, rent)

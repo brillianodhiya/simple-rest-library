@@ -22,10 +22,10 @@ module.exports = {
                 username: user.username,
                 level: user.level
               }, process.env.SECRET_KEY)
-              res.status(200).header('Authorization', accessToken).send({
+              res.status(200).send({
                 status: 200,
                 message: 'Register Success',
-                access_token: accessToken
+                name: user.name,
               })
             })
           })
@@ -57,11 +57,12 @@ module.exports = {
             username: user.username,
             level: user.level
           }, process.env.SECRET_KEY)
-          res.status(200).header('Authorization', accessToken).send({
+          res.status(200).send({
             status: 200,
             message: 'Login Success',
             acces_token: accessToken,
-            username: user.username
+            name: user.name,
+            level: user.level,
           })
         })
       })

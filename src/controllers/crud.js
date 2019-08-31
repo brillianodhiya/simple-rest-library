@@ -41,8 +41,6 @@ module.exports = {
       title: req.body.title,
       description: req.body.description,
       image: req.body.image,
-      date_released: req.body.date_released,
-      genre: req.body.genre,
       update_at: new Date()
     }
 
