@@ -4,7 +4,14 @@ module.exports = {
   deleteBook: (id) => {
     return new Promise((resolve, reject) => {
       conn.query('DELETE FROM books WHERE ?', id, (err, result) => {
-        !err ? resolve(result) : reject(err)
+        if (!err) {
+          conn.query('DELETE FROM rents WHERE ?', id, (err, result) => {
+            !err ? resolve(result) : reject(err) 
+          })
+        } else {
+          reject(err)
+        }
+        // !err ? resolve(result) : reject(err)
       })
     })
   },
