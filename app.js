@@ -9,7 +9,7 @@ const Route = require('./src/routes/')
 
 const app = express()
 
-const PORT = process.env.SERVER_PORT || 8888
+const PORT = process.env.SERVER_PORT || 5000
 
 app.use(cors())
 
