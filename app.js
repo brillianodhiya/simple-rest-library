@@ -9,12 +9,12 @@ const Route = require('./src/routes/')
 
 const app = express()
 
-const port = process.env.SERVER_PORT || 8888
+const PORT = process.env.SERVER_PORT || 8888
 
 app.use(cors())
 
-app.listen(port, () => {
-  console.log('Server is running on Port ' + port)
+app.listen(PORT, () => {
+  console.log('Server is running on Port ' + PORT)
 })
 
 app.use(logger('dev'))
