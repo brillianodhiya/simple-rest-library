@@ -12,6 +12,7 @@ const userController = require('../controllers/user')
 const verify = require('../middleware/verify')
 const validation = require('../middleware/validation')
 const validationlogin = require('../middleware/validationlogin')
+const searchbygenre = require('../controllers/searchbygenre')
 
 Route
   .post('/', libraryController.insertBook)
@@ -20,6 +21,7 @@ Route
   .get('/', combineController.combinSearch)
   .get('/show', searchController.searchById)
   .get('/all', libraryController.getBooks)
+  .get('/all/genre', searchbygenre.searchgenre)
 
   .post('/genre', libraryController.insertGenre)
   .get('/genre', libraryController.getGenre)

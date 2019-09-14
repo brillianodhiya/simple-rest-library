@@ -1,18 +1,32 @@
+require('dotenv').config()
 const modelBook = require('../models//cru')
 const deleteBG = require('../models/delete')
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 module.exports = {
   insertBook: (req, res) => {
+
+    const image = req.files.photo
+
+    cloudinary.uploader.upload(image.tempFilePath)
+
     const data = {
       title: req.body.title,
       description: req.body.description,
-      image: req.body.image,
+      image: result.url,
       date_released: req.body.date_released,
-      genre: req.body.genre,
+      genre: req.body.genre, 
       available: 1,
       add_at: new Date(),
       update_at: new Date()
     } // add data for table database
+
 
     console.log(data)
     modelBook.insertBook(data)
@@ -28,7 +42,10 @@ module.exports = {
       })) // execute
   },
   getBooks: (req, res) => {
-    modelBook.getBookData()
+
+    const search = req.query.search || ''
+
+    modelBook.getBookData(search)
       .then(result => res.json(result))
       .catch(err => console.log(err))
   },

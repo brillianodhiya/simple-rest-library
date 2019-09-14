@@ -8,14 +8,19 @@ const bodyParser = require('body-parser')
 const Route = require('./src/routes/')
 
 const app = express()
+const fileupload = require('express-fileupload')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8888
 
 app.use(cors())
 
 app.listen(PORT, () => {
   console.log('Server is running on Port ' + PORT)
 })
+
+app.use(fileupload({
+  useTempFiles: true
+}))
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
