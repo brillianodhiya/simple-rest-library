@@ -35,3 +35,4 @@ SECRET_KEY = 'secretkey1412' //you can change secret key
 ## End Point
 
 You can see all end point  in [End Point](src/routes/index.js)
+and use Postman to try it
